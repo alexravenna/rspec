@@ -1,0 +1,5 @@
+This rule raises an issue when a method modifies the size of a collection, while the same collection is iterated.
+
+== Why is this an issue?
+
+WIP
