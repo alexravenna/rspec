@@ -1,6 +1,12 @@
 {
   "title": "Iterators should not be used after invalidation",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
