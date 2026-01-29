@@ -1,4 +1,4 @@
-This rule raises an issue when a test method does not contain any assertion statements or calls to assertion methods.
+This rule raises an issue when a test method does not contain any assertion statements, calls to assertion methods, or use of framework-specific assertion blocks (such as Spock's `then:`, `expect:`, or `where:` blocks). The rule does not apply to disabled tests or tests that delegate to helper methods containing assertions.
 
 == Why is this an issue?
 
@@ -11,6 +11,14 @@ Second, missing assertions often indicate incomplete test implementation. Develo
 Third, such tests can hide real issues. If the tested code throws an exception, the test will fail, but if it completes without error, the test passes regardless of whether the behavior is correct.
 
 Finally, tests without assertions make it harder to understand what behavior is being verified, reducing the documentation value of the test suite.
+
+=== Exceptions
+
+The following patterns are considered valid and will not trigger this rule:
+
+* Tests using framework-specific assertion blocks (e.g., Spock's `then:`, `expect:`, or `where:` blocks)
+* Tests explicitly marked as disabled (e.g., `@Test(enabled=false)` in TestNG)
+* Tests that delegate verification to helper methods that encapsulate assertions
 
 === What is the potential impact?
 
@@ -81,3 +89,9 @@ def "should process order"() { // Compliant
 ----
 
 == Resources
+
+=== Documentation
+
+* JUnit 5 Assertions - https://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions[Official JUnit 5 documentation on writing assertions]
+
+* Spock Framework Assertions - https://spockframework.org/spock/docs/2.3/assertions.html[Spock framework documentation on implicit and explicit assertions]
