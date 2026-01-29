@@ -1,16 +1,26 @@
-This rule raises an issue when `Thread.sleep()` or `sleep()` is called within a loop where the thread is waiting for a condition to change.
+This rule raises an issue when `Thread.sleep()` or `sleep()` is called within a loop where the thread is repeatedly polling to check if a condition has changed.
 
 == Why is this an issue?
 
 Busy waiting with `Thread.sleep()` in loops is an anti-pattern that wastes CPU resources and creates unpredictable timing behavior.
 
-When a thread uses `Thread.sleep()` inside a loop to wait for a condition, it forces the thread to wake up at regular intervals just to check if the condition has changed. This approach has several problems:
+When a thread uses `Thread.sleep()` inside a loop to repeatedly poll for a condition change, it forces the thread to wake up at regular intervals just to check if the condition has changed. This approach has several problems:
 
 * *Resource waste*: The thread consumes CPU cycles unnecessarily by repeatedly waking up and checking conditions
 * *Unpredictable timing*: The actual sleep duration may vary depending on system load and thread scheduling
 * *Poor responsiveness*: The thread may not respond immediately when the awaited condition becomes true
 * *Scalability issues*: Multiple threads doing busy waiting can significantly impact system performance
 
+=== Exceptions
+
+This rule does NOT apply to timing control patterns where `Thread.sleep()` creates intentional delays for legitimate purposes:
+
+* *UI animations and updates*: Fixed-rate timing control for visual effects or periodic UI refreshes
+* *Hardware operations*: Timing patterns for GPIO toggling, signal generation, or hardware communication protocols
+* *Test orchestration*: Deliberate blocking in tests where the intent is to create delays rather than wait for conditions to change
+* *Rate limiting*: Intentional throttling of operations at a fixed rate
+
+The key distinction is the intent: polling for condition changes (problematic) versus creating intentional timing delays (acceptable).
 
 === What is the potential impact?
 

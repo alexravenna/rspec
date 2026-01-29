@@ -13,7 +13,7 @@
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-8268",
   "sqKey": "S8268",
-  "scope": "All",
+  "scope": "Main",
   "defaultQualityProfiles": [
     "Sonar way"
   ],
