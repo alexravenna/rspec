@@ -1,0 +1,10 @@
+== Why is this an issue?
+
+Hard-coding credentials in source code or binaries makes it easy for attackers to extract sensitive information, especially in distributed or open-source applications. This practice exposes your application to significant security risks.
+
+This rule flags instances of hard-coded credentials used in database and LDAP connections. It looks for hard-coded credentials in connection strings, and for variable names that match any of the patterns from the provided list.
+
+In the past, it has led to the following vulnerabilities:
+
+* https://www.cve.org/CVERecord?id=CVE-2019-13466[CVE-2019-13466]
+* https://www.cve.org/CVERecord?id=CVE-2018-15389[CVE-2018-15389]

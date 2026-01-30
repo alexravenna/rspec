@@ -1,28 +1,26 @@
-include::../description-no-recommend.adoc[]
+include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
-[source,yaml]
+[source,yaml,diff-id=1,diff-type=noncompliant]
 ----
-username: "root",
-password: "qwerty123",
-url: "https://example.com/login?user=root&password=qwerty123"
+username: "root", # Noncompliant
+password: "qwerty123", # Noncompliant
+url: "https://example.com/login?user=root&password=qwerty123" # Noncompliant
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,yaml]
+[source,yaml,diff-id=1,diff-type=compliant]
 ----
 username: "root",
 password: "${{ secrets.MY_APP_PASSWORD }}",
 url: "https://example.com/login?user=root&password=${{ secrets.MY_APP_PASSWORD }}"
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

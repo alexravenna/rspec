@@ -1,13 +1,12 @@
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
-
-== Sensitive Code Example
+==== Noncompliant code example
 
 https://docs.spring.io/spring-social-twitter/docs/1.1.0.RELEASE/reference/htmlsingle/[Spring-social-twitter] secrets can be stored inside a xml file:
 
+[source,xml,diff-id=1,diff-type=noncompliant]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -20,7 +19,7 @@ https://docs.spring.io/spring-social-twitter/docs/1.1.0.RELEASE/reference/htmlsi
           <list>
               <bean class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
                   <constructor-arg value="username" />
-                  <constructor-arg value="very-secret-password" />   <!-- Sensitive --> 
+                  <constructor-arg value="very-secret-password" />   <!-- Noncompliant -->
               </bean>
           </list>
       </property>
@@ -28,11 +27,11 @@ https://docs.spring.io/spring-social-twitter/docs/1.1.0.RELEASE/reference/htmlsi
 </beans>
 ----
 
-== Compliant Solution
+==== Compliant solution
 
 In https://docs.spring.io/spring-social-twitter/docs/1.1.0.RELEASE/reference/htmlsingle/[spring social twitter], retrieve secrets from environment variables:
 
-[source,xml]
+[source,java,diff-id=1,diff-type=compliant]
 ----
 @Configuration
 public class SocialConfig implements SocialConfigurer {
@@ -46,7 +45,7 @@ public class SocialConfig implements SocialConfigurer {
 }
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

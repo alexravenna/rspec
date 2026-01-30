@@ -1,27 +1,28 @@
-include::../description.adoc[]
-
-include::../ask-yourself.adoc[]
-
-include::../recommended.adoc[]
+include::../why.adoc[]
 
 === Exceptions
 
 * The rule ignores string literals that are used directly in Regexp methods.
 
-== Sensitive Code Example
+include::../how-to-fix-it.adoc[]
 
+=== Code Examples
+
+==== Noncompliant code example
+
+[source,go,diff-id=1,diff-type=noncompliant]
 ----
 func connect()  {
   user := "root"
-  password:= "supersecret" // Sensitive
+  password:= "supersecret" // Noncompliant
 
   url := "login=" + user + "&passwd=" + password
 }
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,go]
+[source,go,diff-id=1,diff-type=compliant]
 ----
 func connect()  {
   user := getEncryptedUser()
@@ -31,7 +32,7 @@ func connect()  {
 }
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

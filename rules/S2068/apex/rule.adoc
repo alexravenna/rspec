@@ -1,23 +1,22 @@
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
+[source,apex,diff-id=1,diff-type=noncompliant]
 ----
-String password = 'xxxx'; // Sensitive
+String password = 'xxxx'; // Noncompliant
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,apex]
+[source,apex,diff-id=1,diff-type=compliant]
 ----
 String password = retrievePassword();
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

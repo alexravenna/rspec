@@ -1,18 +1,8 @@
-== Why is this an issue?
-
-Hard-coding credentials in source code or binaries makes it easy for attackers to extract sensitive information, especially in distributed or open-source applications. This practice exposes your application to significant security risks.
-
-This rule flags instances of hard-coded credentials used in database and LDAP connections. It looks for hard-coded credentials in connection strings, and for variable names that match any of the patterns from the provided list.
-
-
-== How to fix it
-
-Credentials should be stored in a configuration file that is not committed to the code repository, in a database, or managed by your cloud provider's secrets management service. If a password is exposed in the source code, it must be changed immediately.
-
+include::../description.adoc[]
 
 === Code Examples
 
-==== Noncompliant Code Example
+==== Noncompliant code example
 
 [source,php,diff-id=1,diff-type=noncompliant]
 ----
@@ -22,7 +12,7 @@ $httpUrl = "https://example.domain?user=user&password=65DBGgwe4uazdWQA" // Nonco
 $sshUrl = "ssh://user:65DBGgwe4uazdWQA@example.domain" // Noncompliant
 ----
 
-==== Compliant Solution
+==== Compliant solution
 
 [source,php,diff-id=1,diff-type=compliant]
 ----
@@ -33,13 +23,7 @@ $httpUrl = "https://example.domain?user=$user&password=$password" // Compliant
 $sshUrl = "ssh://$user:$password@example.domain" // Compliant
 ----
 
-== Resources
-
-* OWASP - https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/[Top 10 2021 Category A7 - Identification and Authentication Failures]
-* OWASP - https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication[Top 10 2017 Category A2 - Broken Authentication]
-* CWE - https://cwe.mitre.org/data/definitions/798[CWE-798 - Use of Hard-coded Credentials]
-* CWE - https://cwe.mitre.org/data/definitions/259[CWE-259 - Use of Hard-coded Password]
-* Derived from FindSecBugs rule https://h3xstream.github.io/find-sec-bugs/bugs.htm#HARD_CODE_PASSWORD[Hard Coded Password]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

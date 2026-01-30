@@ -1,12 +1,10 @@
-include::../description-no-recommend.adoc[]
+include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
-[source,json]
+[source,json,diff-id=1,diff-type=noncompliant]
 ----
 {
   "username": "root",
@@ -15,9 +13,9 @@ include::../recommended.adoc[]
 }
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,json]
+[source,json,diff-id=1,diff-type=compliant]
 ----
 {
   "username": "root",
@@ -26,7 +24,7 @@ include::../recommended.adoc[]
 }
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

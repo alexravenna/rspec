@@ -1,4 +1,22 @@
-include::../rule.adoc[]
+include::../description.adoc[]
+
+=== Code Examples
+
+==== Noncompliant code example
+
+[source,tsql,diff-id=1,diff-type=noncompliant]
+----
+DECLARE @password nvarchar(100) = 'hardcoded_pwd'; -- Noncompliant
+----
+
+==== Compliant solution
+
+[source,tsql,diff-id=1,diff-type=compliant]
+----
+DECLARE @password nvarchar(100) = dbo.GetDatabasePassword(); -- Compliant
+----
+
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

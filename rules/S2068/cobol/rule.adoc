@@ -1,25 +1,24 @@
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
+[source,cobol,diff-id=1,diff-type=noncompliant]
 ----
 MOVE "admin" TO UID.
 MOVE "letMeIn" TO PWD.
 EXEC SQL
-  CONNECT :UID  *> Sensitive
-  IDENTIFIED BY :PWD  *> Sensitive
+  CONNECT :UID  *> Noncompliant
+  IDENTIFIED BY :PWD  *> Noncompliant
   AT :MYCONN
   USING :MYSERVER
 END-EXEC.
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,cobol]
+[source,cobol,diff-id=1,diff-type=compliant]
 ----
 DISPLAY env-name-pwd UPON ENVIRONMENT-NAME
 ACCEPT env-val-pwd FROM ENVIRONMENT-VALUE *> Compliant
@@ -35,7 +34,7 @@ EXEC SQL
 END-EXEC.
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

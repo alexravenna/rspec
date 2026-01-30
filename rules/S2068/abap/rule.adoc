@@ -1,17 +1,26 @@
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
+[source,abap,diff-id=1,diff-type=noncompliant]
 ----
-DATA: password(10) VALUE 'secret123', 
+DATA: password(10) VALUE 'secret123',
            pwd(10) VALUE 'secret123'.
 ----
 
-include::../see.adoc[]
+==== Compliant solution
+
+[source,abap,diff-id=1,diff-type=compliant]
+----
+DATA: password(10) TYPE string,
+           pwd(10) TYPE string.
+password = get_encrypted_password( ).
+pwd = get_encrypted_password( ).
+----
+
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

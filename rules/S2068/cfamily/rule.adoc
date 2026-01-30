@@ -1,43 +1,26 @@
-Because it is easy to extract strings from an application source code or binary, passwords should not be hard-coded. This is particularly true for applications that are distributed or that are open-source.
+include::../description.adoc[]
 
+=== Code Examples
 
-In the past, it has led to the following vulnerabilities:
+==== Noncompliant code example
 
-* https://www.cve.org/CVERecord?id=CVE-2019-13466[CVE-2019-13466]
-* https://www.cve.org/CVERecord?id=CVE-2018-15389[CVE-2018-15389]
-
-Passwords should be stored outside of the code in a configuration file, a database, or a management service for secrets. 
-
-
-This rule looks for hard-coded passwords in variable names that match any of the patterns from the provided list.
-
-include::../ask-yourself.adoc[]
-
-include::../recommended.adoc[]
-
-== Sensitive Code Example
-
+[source,cpp,diff-id=1,diff-type=noncompliant]
 ----
 dbi_conn conn = dbi_conn_new("mysql");
-string password = "secret"; // Sensitive
+string password = "secret"; // Noncompliant
 dbi_conn_set_option(conn, "password", password.c_str());
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,cpp]
+[source,cpp,diff-id=1,diff-type=compliant]
 ----
 dbi_conn conn = dbi_conn_new("mysql");
 string password = getDatabasePassword(); // Compliant
 dbi_conn_set_option(conn, "password", password.c_str()); // Compliant
 ----
 
-== See
-
-* OWASP - https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/[Top 10 2021 Category A7 - Identification and Authentication Failures]
-* OWASP - https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication[Top 10 2017 Category A2 - Broken Authentication]
-* CWE - https://cwe.mitre.org/data/definitions/259[CWE-259 - Use of Hard-coded Password]
-* Derived from FindSecBugs rule https://h3xstream.github.io/find-sec-bugs/bugs.htm#HARD_CODE_PASSWORD[Hard Coded Password]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

@@ -1,21 +1,20 @@
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
+[source,swift,diff-id=1,diff-type=noncompliant]
 ----
-let postData = "username=Steve&password=123456".data(using: .utf8)  // Sensitive
+let postData = "username=Steve&password=123456".data(using: .utf8)  // Noncompliant
 //...
 var request = URLRequest(url: url)
 request.HTTPBody = postData
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,swift]
+[source,swift,diff-id=1,diff-type=compliant]
 ----
 let postData = "username=\(getEncryptedUser())&password=\(getEncryptedPass())".data(using: .utf8)
 //...
@@ -23,7 +22,7 @@ var request = URLRequest(url: url)
 request.HTTPBody = postData
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 

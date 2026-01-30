@@ -1,24 +1,23 @@
-include::../description-no-recommend.adoc[]
+include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
+[source,kotlin,diff-id=1,diff-type=noncompliant]
 ----
-val params = "password=xxxx" // Sensitive
+val params = "password=xxxx" // Noncompliant
 val writer = OutputStreamWriter(getOutputStream())
 writer.write(params)
 writer.flush()
 ...
-val password = "xxxx" // Sensitive
+val password = "xxxx" // Noncompliant
 ...
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,kotlin]
+[source,kotlin,diff-id=1,diff-type=compliant]
 ----
 val params = "password=${retrievePassword()}"
 val writer = OutputStreamWriter(getOutputStream())
@@ -29,7 +28,7 @@ val password = retrievePassword()
 ...
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 
