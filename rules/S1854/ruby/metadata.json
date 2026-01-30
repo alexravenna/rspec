@@ -1,7 +1,7 @@
 {
   "title": "Unused assignments should be removed",
   "type": "CODE_SMELL",
-  "status": "ready",
+  "status": "beta",
   "remediation": {
     "func": "Constant/Issue",
     "constantCost": "1min"
@@ -14,9 +14,7 @@
   "ruleSpecification": "RSPEC-1854",
   "sqKey": "S1854",
   "scope": "All",
-  "defaultQualityProfiles": [
-    "Sonar way"
-  ],
+  "defaultQualityProfiles": [],
   "quickfix": "unknown",
   "code": {
     "impacts": {
