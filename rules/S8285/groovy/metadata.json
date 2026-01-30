@@ -12,7 +12,7 @@
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-8285",
   "sqKey": "S8285",
-  "scope": "All",
+  "scope": "Main",
   "defaultQualityProfiles": [
     "Sonar way"
   ],
