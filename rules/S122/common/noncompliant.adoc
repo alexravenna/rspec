@@ -1,4 +1,6 @@
 [source,java]
 ----
-if (someCondition) doSomething(); // Noncompliant
+if (someCondition) { doSomething(); } // Noncompliant
+
+doSomething(); doSomethingElse(); // Noncompliant
 ----

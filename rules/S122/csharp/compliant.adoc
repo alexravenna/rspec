@@ -4,4 +4,7 @@ if (someCondition)
 {
   DoSomething();
 }
+
+DoSomething();
+DoSomethingElse();
 ----

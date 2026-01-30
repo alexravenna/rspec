@@ -1,4 +1,6 @@
 [source,csharp]
 ----
-if (someCondition) DoSomething(); // Noncompliant
+if (someCondition) { DoSomething(); } // Noncompliant
+
+DoSomething(); DoSomethingElse(); // Noncompliant
 ----
