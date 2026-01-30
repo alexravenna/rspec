@@ -3,13 +3,11 @@
 
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
-[source,python]
+[source,python,diff-id=1,diff-type=noncompliant]
 ----
 import requests
 
@@ -22,10 +20,10 @@ def send_api_request(data):
     return requests.post("https://api.example.com", headers=headers, data=data)
 ----
 
-== Compliant Solution
+==== Compliant solution
 
 Using https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/secretsmanager/scenario_get_secret.py[AWS Secrets Manager]:
-[source,python]
+[source,python,diff-id=1,diff-type=compliant]
 ----
 import boto3
 import logging
@@ -66,7 +64,7 @@ def send_api_request(data):
     return requests.post("https://api.example.com", headers=headers, data=data)
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 * AWS Secrets Manager - https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/python/example_code/secretsmanager[Code Examples]
 * Azure Key Vault - https://learn.microsoft.com/en-us/azure/key-vault/secrets/quick-create-python?tabs=azure-cli[Quickstart]

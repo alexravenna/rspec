@@ -3,13 +3,11 @@
 
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
-[source,java]
+[source,java,diff-id=1,diff-type=noncompliant]
 ----
 private static final String MY_SECRET = "47828a8dd77ee1eb9dde2d5e93cb221ce8c32b37";
 
@@ -18,11 +16,11 @@ public static void main(String[] args) {
 }
 ----
 
-== Compliant Solution
+==== Compliant solution
 
 Using https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javav2/example_code/secrets-manager[AWS Secrets Manager]:
 
-[source,java]
+[source,java,diff-id=1,diff-type=compliant]
 ----
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
@@ -76,10 +74,9 @@ public static void doSomething(SecretClient secretClient, String secretName) {
 ----
 
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 * OWASP - https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage.html[Mobile Top 10 2024 Category M1 - Improper Credential Usage]
-* MSC - https://wiki.sei.cmu.edu/confluence/x/OjdGBQ[MSC03-J - Never hard code sensitive information]
 
 
 ifdef::env-github,rspecator-view[]

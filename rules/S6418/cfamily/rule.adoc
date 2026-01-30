@@ -3,22 +3,23 @@
 
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
-[source,cpp]
+[source,cpp,diff-id=1,diff-type=noncompliant]
 ----
 char const *mySecret = "47828a8dd77ee1eb9dde2d5e93cb221ce8c32b37";
 ----
 
+==== Compliant solution
 
+[source,cpp,diff-id=1,diff-type=compliant]
+----
+const char* mySecret = std::getenv("MY_APP_SECRET");
+----
 
-include::../see.adoc[]
-
-* MSC - https://wiki.sei.cmu.edu/confluence/x/OjdGBQ[MSC03-J - Never hard code sensitive information] 
+include::../resources.adoc[]
 
 
 ifdef::env-github,rspecator-view[]

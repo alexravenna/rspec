@@ -1,0 +1,6 @@
+== Why is this an issue?
+
+Hard-coding secrets in source code or binaries makes it easy for attackers to extract sensitive information, especially in distributed or open-source applications. This practice exposes credentials and tokens, increasing the risk of unauthorized access and data breaches.
+
+This rule detects {detections} having a name matching a list of words (secret, token, credential, auth, api[_.-]?key) being assigned a pseudorandom hard-coded value.
+The pseudorandomness of the hard-coded value is based on its entropy and the probability to be human-readable. The randomness sensibility can be adjusted if needed. Lower values will detect less random values, raising potentially more false positives.

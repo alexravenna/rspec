@@ -3,13 +3,11 @@
 
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
-[source,yaml]
+[source,yaml,diff-id=1,diff-type=noncompliant]
 ----
 apiVersion: v1
 kind: Pod
@@ -23,12 +21,12 @@ spec:
         - containerPort: 80
       env:
         - name: API_TOKEN
-          value: "f7a9s8d7f6as98df7a6s9d8f7a6sd9f87as6df"  # Sensitive
+          value: "f7a9s8d7f6as98df7a6s9d8f7a6sd9f87as6df"  # Noncompliant
 ----
 
-== Compliant Solution
+==== Compliant solution
 
-[source,yaml]
+[source,yaml,diff-id=1,diff-type=compliant]
 ----
 apiVersion: v1
 kind: Pod
@@ -48,11 +46,7 @@ spec:
               key: api-key
 ----
 
-
-include::../see.adoc[]
-
-* MSC - https://wiki.sei.cmu.edu/confluence/x/OjdGBQ[MSC03-J - Never hard code sensitive information]
-
+include::../resources.adoc[]
 
 ifdef::env-github,rspecator-view[]
 '''

@@ -3,29 +3,27 @@
 
 include::../description.adoc[]
 
-include::../ask-yourself.adoc[]
+=== Code Examples
 
-include::../recommended.adoc[]
+==== Noncompliant code example
 
-== Sensitive Code Example
-
-[source,swift]
+[source,swift,diff-id=1,diff-type=noncompliant]
 ----
-let secret = "47828a8dd77ee1eb9dde2d5e93cb221ce8c32b37" // Sensitive
+let secret = "47828a8dd77ee1eb9dde2d5e93cb221ce8c32b37" // Noncompliant
 
 func main() {
     callMyService(secret)
 }
 ----
 
-== Compliant Solution
+==== Compliant solution
 
 If you are building a mobile application, it is recommended to keep API keys in a secure backend instead of hardcoding them in the mobile application.
 Requests to an API can then be proxied from the mobile application through that backend.
 
 In order to communicate with the API, you can set up an authentication flow with the backend. The resulting access key should be kept in the Keychain:
 
-[source,swift]
+[source,swift,diff-id=1,diff-type=compliant]
 ----
 func storeSecret(accessKey: String) throws {
     let accessControl = SecAccessControlCreateWithFlags(
@@ -66,11 +64,9 @@ func main() async throws {
 }
 ----
 
-include::../see.adoc[]
+include::../resources.adoc[]
 
 * OWASP - https://owasp.org/www-project-mobile-top-10/2023-risks/m1-improper-credential-usage.html[Mobile Top 10 2024 Category M1 - Improper Credential Usage]
-* MSC - https://wiki.sei.cmu.edu/confluence/x/OjdGBQ[MSC03-J - Never hard code sensitive information] 
-
 
 ifdef::env-github,rspecator-view[]
 '''
