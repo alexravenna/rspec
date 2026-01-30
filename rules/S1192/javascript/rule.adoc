@@ -5,8 +5,16 @@ include::../description.adoc[]
 === Exceptions
 
 To prevent generating some false-positives, literals having less than 10 characters are excluded as well as literals matching ``++/^\w*$/++``.
-String literals inside import/export statements and JSX attributes are also ignored.
-The same goes for statement-like string literals, e.g. `'use strict';`.
+
+The following patterns are also excluded based on AST context rather than string content:
+
+* Import and export paths (e.g., `import x from 'path'`)
+* `require()` calls
+* JSX attributes
+* Type declarations and object properties
+* Standalone string statements like directives (e.g., `'use strict';`)
+
+The `ignoreStrings` parameter is additive to these built-in exceptions, allowing you to specify additional strings to ignore via comma-separated values.
 
 == How to fix it
 
