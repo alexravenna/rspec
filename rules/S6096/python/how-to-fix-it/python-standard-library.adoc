@@ -1,0 +1,48 @@
+== How to fix it in Python Standard Library
+
+=== Code examples
+
+:canonicalization_function1: os.path.abspath
+:canonicalization_function2: os.path.realpath
+
+include::../../common/fix/code-rationale.adoc[]
+
+==== Noncompliant code example
+
+[source,python,diff-id=1,diff-type=noncompliant]
+----
+import os
+import tarfile
+
+def extract_tar(tar_path, target_dir):
+    with tarfile.open(tar_path, 'r') as tf:
+        for member in tf.getmembers():
+            dest = os.path.join(target_dir, member.name) 
+            with tf.extractfile(member) as source:
+                with open(dest, 'wb') as target: # Noncompliant
+                    target.write(source.read())
+----
+
+==== Compliant solution
+
+[source,python,diff-id=1,diff-type=compliant]
+----
+import os
+import tarfile
+
+def extract_tar(tar_path, target_dir):
+    canonical_target = os.path.abspath(target_dir) + os.sep
+    with tarfile.open(tar_path, 'r') as tf:
+        for member in tf.getmembers():
+            dest = os.path.join(target_dir, member.name)
+            if not os.path.abspath(dest).startswith(target_dir):
+                raise ValueError("Invalid destination path")  
+            with tf.extractfile(member) as source:
+                with open(dest, 'wb') as target:
+                    target.write(source.read())
+----
+
+=== How does this work?
+
+include::../../common/fix/how-does-this-work.adoc[]
+
