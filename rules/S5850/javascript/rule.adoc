@@ -33,6 +33,16 @@ If the precedence of the operators is understood and the intention is to apply t
 const regex = /(?:^a)|b|(?:c$)/;
 ----
 
+== Exceptions
+
+No issue will be raised for two-alternative patterns where the first alternative starts with ``++^++`` and the second ends with ``++$++``. These are valid trimming idioms commonly used to match at the start OR end of strings.
+
+[source,javascript]
+----
+const regex = /^\s+|\s+$/g; // Compliant by exception: matches whitespace at start or end
+const regex = /^foo|bar$/; // Compliant by exception: matches 'foo' at start or 'bar' at end
+----
+
 == Resources
 === Documentation
 
