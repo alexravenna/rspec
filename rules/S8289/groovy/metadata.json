@@ -13,9 +13,7 @@
   "ruleSpecification": "RSPEC-8289",
   "sqKey": "S8289",
   "scope": "All",
-  "defaultQualityProfiles": [
-    "Sonar way"
-  ],
+  "defaultQualityProfiles": [],
   "quickfix": "infeasible",
   "code": {
     "impacts": {
