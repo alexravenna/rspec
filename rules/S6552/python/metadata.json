@@ -1,5 +1,5 @@
 {
-  "title": "Django signal handler functions should have the '@receiver' decorator on top of all other decorators",
+  "title": "The '@receiver' (Django) and '@route' (Flask) decorators should be the outermost decorators",
   "type": "BUG",
   "code": {
     "impacts": {
@@ -14,12 +14,13 @@
   },
   "tags": [
     "pitfall",
-    "django"
+    "django",
+    "flask"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6552",
   "sqKey": "S6552",
   "scope": "All",
   "defaultQualityProfiles": ["Sonar way"],
-  "quickfix": "unknown"
+  "quickfix": "covered"
 }

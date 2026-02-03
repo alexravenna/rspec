@@ -1,38 +1,40 @@
-This rule enforces that the '@receiver' decorator is placed on top of all other decorators in Django functions.
-
+This rule enforces that the `@receiver` decorator in Django and the `@route` decorator in Flask are placed on top of all other decorators.
 
 == Why is this an issue?
 
-In Django, the '@receiver' decorator is used to register signal handlers. These handlers are used to respond to events that occur in the application, such as a user logging in or a database record being saved.
+The order in which decorators are applied can have a significant impact on their behavior. 
+When decorators are applied in Python, they are processed from bottom to top. 
+The outermost decorator (the one written first) is applied last and receives the result of all inner decorators.
 
+In Django, the `@receiver` decorator is used to register signal handlers. 
+It must be the outermost decorator (written at the top) so that all other decorators are applied to the function before it gets registered as a signal handler. 
+If `@receiver` is not outermost, it registers the original function, and the decorators written above it will not affect the signal handler, resulting in unexpected behavior or errors.
 
-The order in which decorators are applied can have a significant impact on their behavior. In the case of the @receiver decorator, it is important that it is applied first, before any other decorators, in order to ensure that the signal handler is registered correctly.
+In Flask, the `@app.route()` or `@blueprint.route()` decorator must be the outermost decorator for view functions. 
+If other decorators are placed outside the route decorator, the route may not be registered correctly, leading to 404 errors or routes that don't respond to requests as expected.
 
+== How to fix it in Django
 
-If the '@receiver' decorator is not applied first, the decorators placed above it will be ignored, which can result in unexpected behavior or even errors in the application.
-
-== How to fix it
-
-To fix this issue, simply move the '@receiver' decorator to the top of the list of decorators used to decorate the function.
+Move the `@receiver` decorator to the top of the list of decorators used to decorate the function.
 
 === Code examples
 
 ==== Noncompliant code example
 
-[source,python]
+[source,python,diff-id=1,diff-type=noncompliant]
 ----
 from django.dispatch import receiver
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-@receiver(some_signal)
+@receiver(some_signal)  # Noncompliant: @receiver should be the outermost decorator
 def my_handler(sender, **kwargs):
     ...
 ----
 
 ==== Compliant solution
 
-[source,python]
+[source,python,diff-id=1,diff-type=compliant]
 ----
 from django.dispatch import receiver
 from django.views.decorators.csrf import csrf_exempt
@@ -43,11 +45,39 @@ def my_handler(sender, **kwargs):
     ...
 ----
 
+== How to fix it in Flask
+
+Move the `@app.route()` or `@blueprint.route()` decorator to be the outermost (first) decorator.
+
+=== Code examples
+
+==== Noncompliant code example
+
+[source,python,diff-id=2,diff-type=noncompliant]
+----
+@login_required
+@app.route('/secret_page')  # Noncompliant: @route should be the outermost decorator
+def secret_page():
+    return "Secret content"
+----
+
+==== Compliant solution
+
+[source,python,diff-id=2,diff-type=compliant]
+----
+@app.route('/secret_page')
+@login_required
+def secret_page():
+    return "Secret content"
+----
 
 == Resources
 
 === Documentation
-* https://docs.djangoproject.com/en/4.1/topics/signals/[Django signals]
+
+* Django - https://docs.djangoproject.com/en/4.1/topics/signals/[Signals]
+* Flask - https://flask.palletsprojects.com/en/stable/patterns/viewdecorators/[View Decorators]
+* Flask - https://flask.palletsprojects.com/en/stable/quickstart/#routing[Routing]
 
 
 ifdef::env-github,rspecator-view[]
@@ -58,8 +88,7 @@ ifdef::env-github,rspecator-view[]
 
 === Message
 
-Move this '@receiver' decorator to the top of the other decorators.
-
+Move this ['@receiver'|'@route'] decorator to the top of the other decorators.
 
 '''
 
